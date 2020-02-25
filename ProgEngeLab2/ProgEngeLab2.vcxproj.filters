@@ -27,4 +27,10 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="students1.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="students1.txt" />
+  </ItemGroup>
 </Project>
