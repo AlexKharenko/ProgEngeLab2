@@ -22,4 +22,4 @@ void func::create()
         cout<< endl;
     }
     cout<< endl;
-}
+}//its my 
