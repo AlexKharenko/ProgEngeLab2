@@ -155,9 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="students1.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="students1.txt" />
+    <None Include="students21.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
