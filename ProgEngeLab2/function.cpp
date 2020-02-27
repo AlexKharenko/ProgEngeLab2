@@ -30,12 +30,46 @@ void func::create()
         
         cout << endl;
     }
-<<<<<<< HEAD
-    cout<< endl;
-}//its my 
-=======
+	string** budgets = new string * [n];
+	for (int i = 0; i < n; i++)
+		budgets[i] = new string[7];
     cout << endl;
-
+	budgets = budget(rstr, n);
+	seredniy(budgets, n);
     fin.close();
 }
->>>>>>> afa143e50ae39704d02d824d15e16ec2bbc408f1
+
+string** func::budget(string** str, int n) {
+	string stroy = "FALSE";
+	int counter = 0;
+	bool yes = true;
+	string** budget = new string * [n];
+	for (int i = 0; i < n; i++)
+		budget[i] = new string[7];
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < 7; j++) {
+			if (str[i][j] == stroy) {
+				budget[i] = str[i];
+				counter++;
+			}
+		}
+	}
+	return budget;
+}
+void func::seredniy(string** str, int n) {
+	int** matrix = new int* [n];
+	for (int i = 0; i < n; i++)
+		matrix[i] = new int[5];
+	for (int i = 0; i < n; i++) {
+		for (int j = 1; j < 6; j++) {
+			matrix[i][j - 1] = atoi(str[i][j].c_str());
+		}
+	}
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < 5; j++) {
+			cout <<setw(3)<< matrix[i][j];
+		}
+		cout << endl;
+	}
+}
+
