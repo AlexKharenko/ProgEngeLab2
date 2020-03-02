@@ -3,42 +3,69 @@
 
 void func::create()
 {
-    ifstream fin;
-    fin.open("students1.csv");
-    if (!fin.is_open()) {
-        cout << "dfgdgd" << endl;
+	//string ad;
+	//adress(ad);
+    ifstream fin1;
+	ifstream fin2;
+    fin1.open("students1.csv");
+	fin2.open("students2.csv");
+	if (!fin1.is_open() && !fin2.is_open()) {
+		cout << "Error! Files didn`t opened!" << endl;
+	}
+    int n1, n2;
+    fin1 >> n1;
+	fin2 >> n2;
+    string **file1=new string*[n1];
+    for (int i = 0; i < n1; i++) {
+        file1[i] = new string[7];
     }
-    int n;
-    fin >> n;
-    cout << n << endl;
-    string **rstr=new string*[n];
-    for (int i = 0; i < n; i++) {
-        rstr[i] = new string[7];
-    }
-    for (int i = 0; i < n; i++) {
+	string** file2 = new string * [n2];
+	for (int i = 0; i < n2; i++) {
+		file2[i] = new string[7];
+	}
+    for (int i = 0; i < n1; i++) {
         for (int j = 0; j < 6; j++) {
            
-            getline(fin, rstr[i][j], ',');
+            getline(fin1, file1[i][j], ',');
+			getline(fin2, file2[i][j], ',');
             
         }
-        getline(fin, rstr[i][6], '\n');
+		getline(fin1, file1[i][6], '\n');
+        getline(fin2, file2[i][6], '\n');
     }
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < 7; j++) {
-            cout << rstr[i][j] << "\t";
-        }
-        
-        cout << endl;
-    }
-    cout << endl;
-	int counter;
-	counter = find_counter(rstr, n);
-	string** budgets = new string * [counter];
-	for (int i = 0; i < counter; i++)
+	fin1.close();
+	fin2.close();
+	outmatr(file1, n1, 7);
+	outmatr(file2, n2, 7);
+	int count1, count2 ;
+	count1 = find_counter(file1, n1);
+	count2 = find_counter(file2, n2);
+	int countsum = count1 + count2;
+	string** budgets = new string * [countsum];
+	for (int i = 0; i < countsum; i++)
 		budgets[i] = new string[7];
-	budgets = budget(rstr, n);
-	seredniy(budgets, counter);
-    fin.close();
+	budget(budgets, file1, file2, n1, n2, count1, count2);
+	cout << "Матриця бюджетників: " << endl;
+	outmatr(budgets, countsum, 7);
+	seredniy(budgets, countsum);
+    
+}
+
+void func::outmatr(string** a, int n, int m) {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			cout << a[i][j] << "\t";
+		}
+
+		cout << endl;
+	}
+	cout << endl;
+}
+
+void func::adress(string adr) {
+	cout << "Введіть адресу діректорії: ";
+	getline(cin, adr);
+	cout << adr<<endl;
 }
 
 int func::find_counter(string** str, int n) {
@@ -58,43 +85,26 @@ int func::find_counter(string** str, int n) {
 	}
 	return counter;
 }
-string** func::budget(string** str, int n) {
+
+void func::budget(string** budg, string** str1, string** str2, int n1, int n2, int count1, int count2) {
 	string stroy = "FALSE";
-	int counter = 0;
-	bool yes = true;
-	string** budget = new string * [n];
-	for (int i = 0; i < n; i++)
-		budget[i] = new string[7];
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < 7; j++) {
-			if (str[i][j] == stroy) {
-				budget[i] = str[i];
-				counter++;
-			}
+	int k = 0;
+	for (int i = 0; i < n1; i++)
+	{
+		if (str1[i][6] == stroy) {
+			budg[k] = str1[i];
+			k++;
 		}
 	}
-	string** budgeters = new string * [counter];
-	for (int i = 0; i < counter; i++)
-		budgeters[i] = new string[7];
-	for (int j = 0; j < 7; j++) {
-		for (int k = 0; k < counter; k++) {
-			for (int i = 0; i < n; i++) {
-					if (budget[i][j] == stroy) {
-						budgeters[k] = budget[i];
-						k++;
-					}
-				}
-			}
+	for (int i = 0; i < n2; i++)
+	{
+		if (str2[i][6] == stroy) {
+			budg[k] = str2[i];
+			k++;
 		}
-
-	/*for (int i = 0; i <counter ; i++) {
-		for (int j = 0; j < 7; j++) {
-			cout << budgeters[i][j] << "\t";
-		}
-		cout << endl;
-	}*/
-	return budgeters;
+	}
 }
+
 void func::seredniy(string** str, int n) {
 	int** matrix = new int* [n];
 	for (int i = 0; i < n; i++)
@@ -158,6 +168,5 @@ void func::seredniy(string** str, int n) {
 			}
 		}
 	}
-
 }
 
