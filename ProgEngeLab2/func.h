@@ -16,6 +16,7 @@ namespace func{
 	int find_counter(string**, int);
 	void budget(string** ,string**,string** ,int ,int, int, int);
 	void seredniy(string**, int);
+	void sortmatr(string**, int);
 }
 
 

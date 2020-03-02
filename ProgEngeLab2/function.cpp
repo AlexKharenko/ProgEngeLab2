@@ -48,6 +48,7 @@ void func::create()
 	cout << "Матриця бюджетників: " << endl;
 	outmatr(budgets, countsum, 7);
 	seredniy(budgets, countsum);
+	
     
 }
 
@@ -131,12 +132,12 @@ void func::seredniy(string** str, int n) {
 	/*for (int i = 0; i < n; i++) {
 		matrix1[i][5] = matrix1[i][5] / 5;
 	}*/
-	for (int i = 0; i < n; i++) {
+	/*for (int i = 0; i < n; i++) {
 		for (int j = 0; j < 6; j++) {
 			 cout <<setw(3)<< matrix1[i][j];
 		}
 		cout << endl;
-	}
+	}*/
 	string** strok = new string * [n];
 	for (int i = 0; i < n; i++)
 		strok[i] = new string[7];
@@ -148,25 +149,23 @@ void func::seredniy(string** str, int n) {
 			strok[i][j] = to_string(matrix1[i][j - 1]);
 		}
 	}
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < 7; j++) {
-			cout << strok[i][j] << "\t";
+	//outmatr(strok, n, 7);
+	sortmatr(strok, n);
+	outmatr(strok, n, 7);
+
+}
+
+void func::sortmatr(string** str, int n) {
+	string* add = new string[7];
+	int i, j;
+	for (i = 1; i < n; ++i)
+	{
+		add = str[i];
+		for (j = i - 1; j >= 0 && atoi(str[j][6].c_str()) < atoi(add[6].c_str()); --j) {
+			str[j + 1] = str[j];
 		}
-		cout << endl;
+		str[j + 1] = add;
 	}
-	string **temp = new string*[n];
-	for (int i = 0; i < n; i++)
-		temp[i] = new string[7];
-	for (int j = 0; j < n; j++) {
-		for (int i = 0; i < 7; i++) {
-			if (atoi(strok[j][6].c_str()) < atoi(strok[j + 1][6].c_str())) {
-				temp[j][i] = strok[j][i];
-				strok[j][i] = strok[j + 1][i];
-				strok[j + 1][i] = temp[j][i];
-				cout << "it works" << endl;
-				cout << atoi(strok[j + 1][6].c_str()) << endl;
-			}
-		}
-	}
+	delete[] add;
 }
 
