@@ -154,19 +154,32 @@ void func::seredniy(string** str, int n) {
 		}
 		cout << endl;
 	}
-	string **temp = new string*[n];
+	string** temp = new string * [n];
 	for (int i = 0; i < n; i++)
 		temp[i] = new string[7];
-	for (int j = 0; j < n; j++) {
-		for (int i = 0; i < 7; i++) {
-			if (atoi(strok[j][6].c_str()) < atoi(strok[j + 1][6].c_str())) {
-				temp[j][i] = strok[j][i];
-				strok[j][i] = strok[j + 1][i];
-				strok[j + 1][i] = temp[j][i];
-				cout << "it works" << endl;
-				cout << atoi(strok[j + 1][6].c_str()) << endl;
-			}
+	for (int j = 0; j < n - 1; j++) {
+		if (atof(strok[j][6].c_str()) < atof(strok[j + 1][6].c_str())) {
+			temp[j] = strok[j];
+			strok[j] = strok[j + 1];
+			strok[j + 1] = temp[j];
+		}
+	}
+	sort(strok, n);
+	outmatr(strok, n, 7);
+}
+
+void func::sort(string** str, int n) {
+	string* temp = new string [n];
+	int item;
+	for (int counter = 1; counter < n; counter++)
+	{
+		temp = str[counter];
+		item = counter - 1;
+		while (item >= 0 && str[item] > temp) 
+		{
+			str[item + 1] = str[item]; 
+			str[item] = temp;
+			item--;
 		}
 	}
 }
-

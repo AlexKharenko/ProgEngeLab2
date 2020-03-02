@@ -10,6 +10,7 @@
 using namespace std;
 
 namespace func{
+	void sort(string**, int);
 	void create();
 	void outmatr(string** , int, int);
 	void adress(string);
