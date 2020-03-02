@@ -104,14 +104,60 @@ void func::seredniy(string** str, int n) {
 			matrix[i][j - 1] = atoi(str[i][j].c_str());
 		}
 	}
+	float** matrix1 = new float* [n];
+	for (int i = 0; i < n; i++)
+		matrix1[i] = new float[6];
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < 6; j++) {
+			matrix1[i][j] = 0;
+		}
+	}
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < 5; j++) {
-			if (matrix[i][j] == 0) {
-				continue;
-			}
-			else cout <<setw(3)<< matrix[i][j];
+			matrix1[i][j] = matrix[i][j];
+			matrix1[i][5] += matrix[i][j];
+		}
+	}
+	/*for (int i = 0; i < n; i++) {
+		matrix1[i][5] = matrix1[i][5] / 5;
+	}*/
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < 6; j++) {
+			 cout <<setw(3)<< matrix1[i][j];
 		}
 		cout << endl;
 	}
+	string** strok = new string * [n];
+	for (int i = 0; i < n; i++)
+		strok[i] = new string[7];
+	for (int i = 0; i < n; i++) {
+		strok[i][0] = str[i][0];
+	}
+	for (int i = 0; i < n; i++) {
+		for (int j = 1; j < 7; j++) {
+			strok[i][j] = to_string(matrix1[i][j - 1]);
+		}
+	}
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < 7; j++) {
+			cout << strok[i][j] << "\t";
+		}
+		cout << endl;
+	}
+	string **temp = new string*[n];
+	for (int i = 0; i < n; i++)
+		temp[i] = new string[7];
+	for (int j = 0; j < n; j++) {
+		for (int i = 0; i < 7; i++) {
+			if (atoi(strok[j][6].c_str()) < atoi(strok[j + 1][6].c_str())) {
+				temp[j][i] = strok[j][i];
+				strok[j][i] = strok[j + 1][i];
+				strok[j + 1][i] = temp[j][i];
+				cout << "it works" << endl;
+				cout << atoi(strok[j + 1][6].c_str()) << endl;
+			}
+		}
+	}
+
 }
 
