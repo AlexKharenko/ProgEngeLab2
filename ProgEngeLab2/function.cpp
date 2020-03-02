@@ -30,15 +30,34 @@ void func::create()
         
         cout << endl;
     }
-	string** budgets = new string * [n];
-	for (int i = 0; i < n; i++)
-		budgets[i] = new string[7];
     cout << endl;
+	int counter;
+	counter = find_counter(rstr, n);
+	string** budgets = new string * [counter];
+	for (int i = 0; i < counter; i++)
+		budgets[i] = new string[7];
 	budgets = budget(rstr, n);
-	seredniy(budgets, n);
+	seredniy(budgets, counter);
     fin.close();
 }
 
+int func::find_counter(string** str, int n) {
+	string stroy = "FALSE";
+	int counter = 0;
+	bool yes = true;
+	string** budget = new string * [n];
+	for (int i = 0; i < n; i++)
+		budget[i] = new string[7];
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < 7; j++) {
+			if (str[i][j] == stroy) {
+				budget[i] = str[i];
+				counter++;
+			}
+		}
+	}
+	return counter;
+}
 string** func::budget(string** str, int n) {
 	string stroy = "FALSE";
 	int counter = 0;
@@ -54,7 +73,27 @@ string** func::budget(string** str, int n) {
 			}
 		}
 	}
-	return budget;
+	string** budgeters = new string * [counter];
+	for (int i = 0; i < counter; i++)
+		budgeters[i] = new string[7];
+	for (int j = 0; j < 7; j++) {
+		for (int k = 0; k < counter; k++) {
+			for (int i = 0; i < n; i++) {
+					if (budget[i][j] == stroy) {
+						budgeters[k] = budget[i];
+						k++;
+					}
+				}
+			}
+		}
+
+	/*for (int i = 0; i <counter ; i++) {
+		for (int j = 0; j < 7; j++) {
+			cout << budgeters[i][j] << "\t";
+		}
+		cout << endl;
+	}*/
+	return budgeters;
 }
 void func::seredniy(string** str, int n) {
 	int** matrix = new int* [n];
@@ -67,7 +106,10 @@ void func::seredniy(string** str, int n) {
 	}
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < 5; j++) {
-			cout <<setw(3)<< matrix[i][j];
+			if (matrix[i][j] == 0) {
+				continue;
+			}
+			else cout <<setw(3)<< matrix[i][j];
 		}
 		cout << endl;
 	}
