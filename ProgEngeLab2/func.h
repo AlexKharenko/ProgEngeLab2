@@ -10,13 +10,15 @@
 using namespace std;
 
 namespace func{
-	void sort(string**, int);
+	void last(string**, int);
 	void create();
 	void outmatr(string** , int, int);
 	void adress(string);
 	int find_counter(string**, int);
 	void budget(string** ,string**,string** ,int ,int, int, int);
 	void seredniy(string**, int);
+	void sortmatr(string**, int);
+	void file(string**, int, int);
 }
 
 

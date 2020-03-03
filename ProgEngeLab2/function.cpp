@@ -5,39 +5,39 @@ void func::create()
 {
 	//string ad;
 	//adress(ad);
-    ifstream fin1;
+	ifstream fin1;
 	ifstream fin2;
-    fin1.open("students1.csv");
+	fin1.open("students1.csv");
 	fin2.open("students2.csv");
 	if (!fin1.is_open() && !fin2.is_open()) {
 		cout << "Error! Files didn`t opened!" << endl;
 	}
-    int n1, n2;
-    fin1 >> n1;
+	int n1, n2;
+	fin1 >> n1;
 	fin2 >> n2;
-    string **file1=new string*[n1];
-    for (int i = 0; i < n1; i++) {
-        file1[i] = new string[7];
-    }
+	string** file1 = new string * [n1];
+	for (int i = 0; i < n1; i++) {
+		file1[i] = new string[7];
+	}
 	string** file2 = new string * [n2];
 	for (int i = 0; i < n2; i++) {
 		file2[i] = new string[7];
 	}
-    for (int i = 0; i < n1; i++) {
-        for (int j = 0; j < 6; j++) {
-           
-            getline(fin1, file1[i][j], ',');
+	for (int i = 0; i < n1; i++) {
+		for (int j = 0; j < 6; j++) {
+
+			getline(fin1, file1[i][j], ',');
 			getline(fin2, file2[i][j], ',');
-            
-        }
+
+		}
 		getline(fin1, file1[i][6], '\n');
-        getline(fin2, file2[i][6], '\n');
-    }
+		getline(fin2, file2[i][6], '\n');
+	}
 	fin1.close();
 	fin2.close();
 	outmatr(file1, n1, 7);
 	outmatr(file2, n2, 7);
-	int count1, count2 ;
+	int count1, count2;
 	count1 = find_counter(file1, n1);
 	count2 = find_counter(file2, n2);
 	int countsum = count1 + count2;
@@ -48,7 +48,8 @@ void func::create()
 	cout << "Матриця бюджетників: " << endl;
 	outmatr(budgets, countsum, 7);
 	seredniy(budgets, countsum);
-    
+
+
 }
 
 void func::outmatr(string** a, int n, int m) {
@@ -65,7 +66,7 @@ void func::outmatr(string** a, int n, int m) {
 void func::adress(string adr) {
 	cout << "Введіть адресу діректорії: ";
 	getline(cin, adr);
-	cout << adr<<endl;
+	cout << adr << endl;
 }
 
 int func::find_counter(string** str, int n) {
@@ -125,18 +126,18 @@ void func::seredniy(string** str, int n) {
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < 5; j++) {
 			matrix1[i][j] = matrix[i][j];
-			matrix1[i][5] += matrix[i][j];
+			matrix1[i][5] += matrix[i][j]/5;
 		}
 	}
 	/*for (int i = 0; i < n; i++) {
 		matrix1[i][5] = matrix1[i][5] / 5;
 	}*/
-	for (int i = 0; i < n; i++) {
+	/*for (int i = 0; i < n; i++) {
 		for (int j = 0; j < 6; j++) {
 			 cout <<setw(3)<< matrix1[i][j];
 		}
 		cout << endl;
-	}
+	}*/
 	string** strok = new string * [n];
 	for (int i = 0; i < n; i++)
 		strok[i] = new string[7];
@@ -148,38 +149,50 @@ void func::seredniy(string** str, int n) {
 			strok[i][j] = to_string(matrix1[i][j - 1]);
 		}
 	}
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < 7; j++) {
-			cout << strok[i][j] << "\t";
-		}
-		cout << endl;
-	}
-	string** temp = new string * [n];
-	for (int i = 0; i < n; i++)
-		temp[i] = new string[7];
-	for (int j = 0; j < n - 1; j++) {
-		if (atof(strok[j][6].c_str()) < atof(strok[j + 1][6].c_str())) {
-			temp[j] = strok[j];
-			strok[j] = strok[j + 1];
-			strok[j + 1] = temp[j];
-		}
-	}
-	sort(strok, n);
-	outmatr(strok, n, 7);
+	//outmatr(strok, n, 7);
+	sortmatr(strok, n);
+	last(strok, n);
+
 }
 
-void func::sort(string** str, int n) {
-	string* temp = new string [n];
-	int item;
-	for (int counter = 1; counter < n; counter++)
+void func::sortmatr(string** str, int n) {
+	string* add = new string[7];
+	int i, j;
+	for (i = 1; i < n; ++i)
 	{
-		temp = str[counter];
-		item = counter - 1;
-		while (item >= 0 && str[item] > temp) 
-		{
-			str[item + 1] = str[item]; 
-			str[item] = temp;
-			item--;
+		add = str[i];
+		for (j = i - 1; j >= 0 && atoi(str[j][6].c_str()) < atoi(add[6].c_str()); --j) {
+			str[j + 1] = str[j];
+		}
+		str[j + 1] = add;
+	}
+}
+void func::last(string** str, int n) {
+	int size = n * 0.4;
+	string** arr = new string*[size];
+	for (int i = 0; i < size; i++)
+		arr[i] = new string[7];
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < 7; j++) {
+			arr[i][j] = str[i][j];
 		}
 	}
+	outmatr(arr, size, 7);
+	file(arr, size, 7);
+
+}
+void func::file(string** str, int n, int m) {
+	ofstream f;
+	f.open("Text.txt", ios::out);
+	if (!f.is_open()) {
+		cout << "Error! Files didn`t opened!" << endl;
+	}
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			f << str[i][j] << " ";
+		}
+		f << endl;
+	}
+	f << "Середній бал для бюджету - " << str[n - 1][m - 1];
+	f.close();
 }
