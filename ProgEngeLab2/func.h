@@ -18,7 +18,10 @@ namespace func{
 	void budget(string** ,string**,string** ,int ,int, int, int);
 	void seredniy(string**, int);
 	void sortmatr(string**, int);
+<<<<<<< HEAD
 	void file(string**, int, int);
+=======
+>>>>>>> c27cee7e8581459930f7eeb005e030df7410ac2b
 }
 
 

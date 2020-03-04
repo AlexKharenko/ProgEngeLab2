@@ -1,4 +1,9 @@
 ﻿  function.cpp
+<<<<<<< HEAD
 D:\Git\ProgEngeLab2\ProgEngeLab2\function.cpp(128,31): warning C4244: =: преобразование "int" в "float", возможна потеря данных
 D:\Git\ProgEngeLab2\ProgEngeLab2\function.cpp(171,11): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
   ProgEngeLab2.vcxproj -> D:\Git\ProgEngeLab2\Debug\ProgEngeLab2.exe
+=======
+C:\Users\Семья\Desktop\Alexey\Учёба\GitHub\ProgEngeLab2\ProgEngeLab2\function.cpp(128,31): warning C4244: =: преобразование "int" в "float", возможна потеря данных
+  ProgEngeLab2.vcxproj -> C:\Users\Семья\Desktop\Alexey\Учёба\GitHub\ProgEngeLab2\Debug\ProgEngeLab2.exe
+>>>>>>> c27cee7e8581459930f7eeb005e030df7410ac2b

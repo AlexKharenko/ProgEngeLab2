@@ -48,8 +48,13 @@ void func::create()
 	cout << "Матриця бюджетників: " << endl;
 	outmatr(budgets, countsum, 7);
 	seredniy(budgets, countsum);
+<<<<<<< HEAD
 
 
+=======
+	
+    
+>>>>>>> c27cee7e8581459930f7eeb005e030df7410ac2b
 }
 
 void func::outmatr(string** a, int n, int m) {
@@ -151,7 +156,11 @@ void func::seredniy(string** str, int n) {
 	}
 	//outmatr(strok, n, 7);
 	sortmatr(strok, n);
+<<<<<<< HEAD
 	last(strok, n);
+=======
+	outmatr(strok, n, 7);
+>>>>>>> c27cee7e8581459930f7eeb005e030df7410ac2b
 
 }
 
@@ -163,6 +172,7 @@ void func::sortmatr(string** str, int n) {
 		add = str[i];
 		for (j = i - 1; j >= 0 && atoi(str[j][6].c_str()) < atoi(add[6].c_str()); --j) {
 			str[j + 1] = str[j];
+<<<<<<< HEAD
 		}
 		str[j + 1] = add;
 	}
@@ -195,4 +205,10 @@ void func::file(string** str, int n, int m) {
 	}
 	f << "Середній бал для бюджету - " << str[n - 1][m - 1];
 	f.close();
+=======
+		}
+		str[j + 1] = add;
+	}
+	delete[] add;
+>>>>>>> c27cee7e8581459930f7eeb005e030df7410ac2b
 }
